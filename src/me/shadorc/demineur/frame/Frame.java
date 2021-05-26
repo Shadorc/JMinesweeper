@@ -70,7 +70,7 @@ class Frame extends JFrame implements ActionListener {
 
 	Frame() {
 
-		JFrame frame = new JFrame("Démineur by Shadorc");
+		JFrame frame = new JFrame("DÃ©mineur by Shadorc");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setBackground(new Color(213, 221, 232));
 
@@ -164,11 +164,11 @@ class Frame extends JFrame implements ActionListener {
 				record = "\n! NOUVEAU RECORD !";
 			}
 
-			JOptionPane.showConfirmDialog(null, "Partie terminée. Temps : " + df.format(time) + "s." + record, "Partie finie", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showConfirmDialog(null, "Partie terminÃ©e. Temps : " + df.format(time) + "s." + record, "Partie finie", JOptionPane.PLAIN_MESSAGE);
 			Scores.add(df.format(time));
 
 		} else {
-			JOptionPane.showConfirmDialog(null, "Partie terminée. Vous avez perdu.", "Partie finie", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showConfirmDialog(null, "Partie terminÃ©e. Vous avez perdu.", "Partie finie", JOptionPane.PLAIN_MESSAGE);
 		}
 	}
 
@@ -202,7 +202,7 @@ class Frame extends JFrame implements ActionListener {
 			if(scores.size() > 0) {
 				JOptionPane.showMessageDialog(null, text, "Scores", JOptionPane.PLAIN_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(null, "Aucun score enregistré.", "Scores", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Aucun score enregistrÃ©.", "Scores", JOptionPane.PLAIN_MESSAGE);
 			}
 		}
 	}

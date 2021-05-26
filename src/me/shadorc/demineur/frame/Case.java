@@ -27,7 +27,7 @@ class Case extends JButton implements ActionListener {
 	interface Image {
 		ImageIcon BOMBE = new ImageIcon(Case.class.getResource("/res/bombe.png"));
 		ImageIcon FLAG = new ImageIcon(Case.class.getResource("/res/drapeau.png"));
-		ImageIcon FAIL_FLAG = new ImageIcon(Case.class.getResource("/res/drapeauBarrée.png"));
+		ImageIcon FAIL_FLAG = new ImageIcon(Case.class.getResource("/res/drapeauBarrÃ©e.png"));
 	}
 
 	Case(int x, int y) {
