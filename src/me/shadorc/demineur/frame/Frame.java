@@ -15,28 +15,23 @@ import java.util.Locale;
 
 class Frame extends JFrame implements ActionListener {
 
-    private static final long serialVersionUID = 1L;
+    private final Grid grid;
 
-    private Grid grid;
-
-    private Border border;
+    private final Border border;
     private Font font;
 
-    private static JLabel bombsInfo = new JLabel("", JLabel.CENTER);
-    private static JLabel timeInfo = new JLabel("", JLabel.CENTER);
+    private static final JLabel bombsInfo = new JLabel("", JLabel.CENTER);
+    private static final JLabel timeInfo = new JLabel("", JLabel.CENTER);
 
-    private JButton scoresButton = new JButton("Scores");
-    private JButton gameButton = new JButton("Nouvelle Partie");
+    private final JButton scoresButton = new JButton("Scores");
+    private final JButton gameButton = new JButton("Nouvelle Partie");
 
     private static DecimalFormat df;
     private static float time = 0;
 
-    private static Timer timer = new Timer(100, new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            time += 0.1;
-            Frame.refresh();
-        }
+    private static final Timer timer = new Timer(100, arg0 -> {
+        time += 0.1;
+        Frame.refresh();
     });
 
     public static void main(String[] args) {
@@ -46,12 +41,7 @@ class Frame extends JFrame implements ActionListener {
 
         Scores.read();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new Frame();
-            }
-        });
+        SwingUtilities.invokeLater(Frame::new);
     }
 
     Frame() {
@@ -150,11 +140,13 @@ class Frame extends JFrame implements ActionListener {
                 record = "\n! NOUVEAU RECORD !";
             }
 
-            JOptionPane.showConfirmDialog(null, "Partie terminée. Temps : " + df.format(time) + "s." + record, "Partie finie", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showConfirmDialog(null, "Partie terminée. Temps : " + df.format(time) + "s." + record,
+                    "Partie finie", JOptionPane.DEFAULT_OPTION);
             Scores.add(df.format(time));
 
         } else {
-            JOptionPane.showConfirmDialog(null, "Partie terminée. Vous avez perdu.", "Partie finie", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showConfirmDialog(null, "Partie terminée. Vous avez perdu.", "Partie finie",
+                    JOptionPane.DEFAULT_OPTION);
         }
     }
 
@@ -177,16 +169,16 @@ class Frame extends JFrame implements ActionListener {
             grid.init(false);
 
         } else if (button.equals(scoresButton)) {
-            String text = "Scores :\n";
+            StringBuilder text = new StringBuilder("Scores :\n");
 
             ArrayList<Float> scores = Scores.getScore();
 
             for (int i = 0; i < scores.size() && i < 5; i++) {
-                text += "\n" + (i + 1) + " : " + scores.get(i) + "s";
+                text.append("\n").append(i + 1).append(" : ").append(scores.get(i)).append("s");
             }
 
             if (scores.size() > 0) {
-                JOptionPane.showMessageDialog(null, text, "Scores", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, text.toString(), "Scores", JOptionPane.PLAIN_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Aucun score enregistré.", "Scores", JOptionPane.PLAIN_MESSAGE);
             }

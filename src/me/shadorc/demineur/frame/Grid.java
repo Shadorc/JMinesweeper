@@ -9,14 +9,13 @@ import java.util.Random;
 
 class Grid extends JPanel {
 
-    private static final long serialVersionUID = 1L;
-
-    private Case cases[][];
-    private Random rand = new Random();
+    private final Case[][] cases;
+    private final Random rand = new Random();
 
     protected static int foundBombs;
     private int remainingCompartments;
-    private int width, height;
+    private final int width;
+    private final int height;
 
     private boolean bombesPosees;
 
@@ -80,7 +79,7 @@ class Grid extends JPanel {
 
     private ArrayList<Case> getAround(Case c) {
 
-        ArrayList<Case> around = new ArrayList<Case>();
+        ArrayList<Case> around = new ArrayList<>();
 
         int x = c.getCoX();
         int y = c.getCoY();
@@ -145,14 +144,6 @@ class Grid extends JPanel {
                 cases[i][o].disable();
             }
         }
-    }
-
-    public Case[][] getGrid() {
-        return cases;
-    }
-
-    public Dimension getDimension() {
-        return new Dimension(width, height);
     }
 
     public int getRemainingCompartments() {

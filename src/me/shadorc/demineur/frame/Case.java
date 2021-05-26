@@ -7,18 +7,17 @@ import java.awt.event.ActionListener;
 
 class Case extends JButton implements ActionListener {
 
-    private static final long serialVersionUID = 1L;
-
-    private static StateListener stateListener = new StateListener();
+    private static final StateListener stateListener = new StateListener();
     protected static Grid grid;
 
     private boolean bomb = false;
     private int bombsAround = 0;
     private State state = State.DEFAULT;
-    private int x, y;
+    private final int x;
+    private final int y;
 
     enum State {
-        DEFAULT, REVEAL, FLAG, INTERROGATION, BOMB;
+        DEFAULT, REVEAL, FLAG, INTERROGATION, BOMB
     }
 
     interface Image {

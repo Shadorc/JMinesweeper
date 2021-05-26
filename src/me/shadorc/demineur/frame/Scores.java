@@ -7,8 +7,8 @@ import java.util.Collections;
 
 class Scores {
 
-    private static ArrayList<Float> scores = new ArrayList<Float>();
-    private static File file = new File("./scores");
+    private static final ArrayList<Float> scores = new ArrayList<>();
+    private static final File file = new File("./scores");
 
     private static void save() {
 
@@ -22,7 +22,7 @@ class Scores {
             }
 
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Erreur lors de la sauvegarder, " + e.toString(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erreur lors de la sauvegarder, " + e, "Erreur", JOptionPane.ERROR_MESSAGE);
 
         } finally {
             try {
@@ -49,7 +49,7 @@ class Scores {
             }
 
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Erreur lors de la lecture des scores, " + e.toString(), "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erreur lors de la lecture des scores, " + e, "Erreur", JOptionPane.ERROR_MESSAGE);
 
         } finally {
             try {
