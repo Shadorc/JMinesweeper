@@ -18,7 +18,7 @@ public class StateListener extends MouseAdapter {
     @Override
     public void mousePressed(MouseEvent event) {
         if (event.getButton() == MouseEvent.BUTTON3) {
-            Cell source = (Cell) event.getSource();
+            final Cell source = (Cell) event.getSource();
 
             // Set a flag in the cell
             if (source.getState() == State.DEFAULT || source.getState() == State.BOMB) {

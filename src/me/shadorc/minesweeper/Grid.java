@@ -63,17 +63,17 @@ public class Grid extends JPanel {
         // Positioning bombs on the grid
         while (bombCount < this.remainingBombs) {
 
-            Cell randCell = this.cells[this.rand.nextInt(this.width)][this.rand.nextInt(this.height)];
+            final Cell randCell = this.cells[this.rand.nextInt(this.width)][this.rand.nextInt(this.height)];
 
             // If the case does not already contain a bomb and is not revealed
             if (!randCell.isBomb() && randCell != clickedCell) {
 
-                List<Cell> surroundingCells = this.getSurroundingCells(randCell);
+                final List<Cell> surroundingCells = this.getSurroundingCells(randCell);
                 if (!surroundingCells.contains(clickedCell)) {
                     randCell.setAsBomb();
                     bombCount++;
 
-                    for (Cell surroundingCell : surroundingCells) {
+                    for (final Cell surroundingCell : surroundingCells) {
                         surroundingCell.incrementSurroundingBombCount();
                     }
                 }
@@ -82,34 +82,34 @@ public class Grid extends JPanel {
     }
 
     private List<Cell> getSurroundingCells(Cell cell) {
-        List<Cell> surroundingCells = new ArrayList<>();
+        final List<Cell> surroundingCells = new ArrayList<>();
 
-        int x = cell.getGridX();
-        int y = cell.getGridY();
+        final int x = cell.getGridX();
+        final int y = cell.getGridY();
 
         if (this.isInBounds(x + 1, y)) {
-            surroundingCells.add(cells[x + 1][y]);
+            surroundingCells.add(this.cells[x + 1][y]);
         }
         if (this.isInBounds(x - 1, y)) {
-            surroundingCells.add(cells[x - 1][y]);
+            surroundingCells.add(this.cells[x - 1][y]);
         }
         if (this.isInBounds(x, y + 1)) {
-            surroundingCells.add(cells[x][y + 1]);
+            surroundingCells.add(this.cells[x][y + 1]);
         }
         if (this.isInBounds(x, y - 1)) {
-            surroundingCells.add(cells[x][y - 1]);
+            surroundingCells.add(this.cells[x][y - 1]);
         }
         if (this.isInBounds(x + 1, y + 1)) {
-            surroundingCells.add(cells[x + 1][y + 1]);
+            surroundingCells.add(this.cells[x + 1][y + 1]);
         }
         if (this.isInBounds(x - 1, y - 1)) {
-            surroundingCells.add(cells[x - 1][y - 1]);
+            surroundingCells.add(this.cells[x - 1][y - 1]);
         }
         if (this.isInBounds(x + 1, y - 1)) {
-            surroundingCells.add(cells[x + 1][y - 1]);
+            surroundingCells.add(this.cells[x + 1][y - 1]);
         }
         if (this.isInBounds(x - 1, y + 1)) {
-            surroundingCells.add(cells[x - 1][y + 1]);
+            surroundingCells.add(this.cells[x - 1][y + 1]);
         }
 
         return surroundingCells;
@@ -122,14 +122,14 @@ public class Grid extends JPanel {
     public void check(int x, int y) {
         if (this.isInBounds(x, y)) {
 
-            Cell cell = cells[x][y];
+            final Cell cell = this.cells[x][y];
 
             if (cell.getState() == State.DEFAULT || cell.getState() == State.INTERROGATION) {
                 this.remainingCells--;
                 cell.reveal();
 
                 if (cell.getSurroundingBombCount() == 0) {
-                    for (Cell surroundingCell : this.getSurroundingCells(cell)) {
+                    for (final Cell surroundingCell : this.getSurroundingCells(cell)) {
                         this.check(surroundingCell.getGridX(), surroundingCell.getGridY());
                     }
                 }

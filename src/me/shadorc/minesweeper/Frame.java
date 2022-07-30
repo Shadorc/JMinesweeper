@@ -27,7 +27,7 @@ public class Frame extends JFrame {
             Objects.requireNonNull(in);
             font = Font.createFont(Font.TRUETYPE_FONT, in)
                     .deriveFont(Font.BOLD, 30);
-        } catch (Exception ignored) {
+        } catch (final Exception ignored) {
             font = new Font("Serif", Font.BOLD, 30);
         }
         DEFAULT_FONT = font;
@@ -58,22 +58,22 @@ public class Frame extends JFrame {
             this.refresh();
         });
 
-        JPanel contentPanel = new JPanel(new BorderLayout());
+        final JPanel contentPanel = new JPanel(new BorderLayout());
         contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contentPanel.setOpaque(false);
 
         this.setContentPane(contentPanel);
 
-        JPanel topPanel = new JPanel(new GridLayout(2, 0, 0, 5));
+        final JPanel topPanel = new JPanel(new GridLayout(2, 0, 0, 5));
         topPanel.setBorder(BorderFactory.createEmptyBorder(0, 3, 3, 3));
         topPanel.setOpaque(false);
 
-        JButton scoresButton = new JButton("Scores");
+        final JButton scoresButton = new JButton("Scores");
         this.config(scoresButton);
         scoresButton.addActionListener((ActionEvent event) -> {
-            StringBuilder text = new StringBuilder("Scores :\n");
+            final StringBuilder text = new StringBuilder("Scores :\n");
 
-            List<Float> scoreList = scores.getScores();
+            final List<Float> scoreList = this.scores.getScores();
             for (int i = 0; i < Math.min(5, scoreList.size()); ++i) {
                 text.append("\n")
                         .append(i + 1)
@@ -92,7 +92,7 @@ public class Frame extends JFrame {
         });
         topPanel.add(scoresButton);
 
-        JButton newGameButton = new JButton("New Game");
+        final JButton newGameButton = new JButton("New Game");
         this.config(newGameButton);
         topPanel.add(newGameButton);
 
@@ -101,11 +101,11 @@ public class Frame extends JFrame {
         this.grid = new Grid(this, 9, 9);
         this.grid.setBorder(BorderFactory.createEmptyBorder(6, 3, 6, 3));
         this.grid.setOpaque(false);
-        contentPanel.add(grid, BorderLayout.CENTER);
+        contentPanel.add(this.grid, BorderLayout.CENTER);
 
         newGameButton.addActionListener((ActionEvent event) -> this.grid.init(false));
 
-        JPanel infoPanel = new JPanel(new GridLayout(0, 2, 10, 0));
+        final JPanel infoPanel = new JPanel(new GridLayout(0, 2, 10, 0));
         infoPanel.setBorder(BorderFactory.createEmptyBorder(3, 3, 0, 3));
         infoPanel.setOpaque(false);
 
@@ -153,7 +153,7 @@ public class Frame extends JFrame {
         label.setOpaque(true);
         label.setForeground(Color.BLACK);
         label.setBackground(Color.WHITE);
-        URL iconUrl = Objects.requireNonNull(this.getClass().getResource(path));
+        final URL iconUrl = Objects.requireNonNull(this.getClass().getResource(path));
         label.setIcon(new ImageIcon(iconUrl));
     }
 
@@ -166,7 +166,7 @@ public class Frame extends JFrame {
         this.timer.stop();
 
         if (isVictory) {
-            StringBuilder message = new StringBuilder();
+            final StringBuilder message = new StringBuilder();
             if (this.scores.getScores().isEmpty() || this.scores.getScores().get(0) > this.getElapsedSeconds()) {
                 message.append("NEW HIGH-SCORE")
                         .append('\n');

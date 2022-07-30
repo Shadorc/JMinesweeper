@@ -2,6 +2,7 @@ package me.shadorc.minesweeper;
 
 import javax.swing.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,20 +21,20 @@ public class Scores {
 
     private void init() {
         try {
-            file.createNewFile();
-        } catch (IOException err) {
+            this.file.createNewFile();
+        } catch (final IOException err) {
             JOptionPane.showMessageDialog(
                     null, "An error occurred while creating save file: " + err.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+        try (final BufferedReader in = new BufferedReader(new FileReader(this.file, StandardCharsets.UTF_8))) {
             String line;
             while ((line = in.readLine()) != null) {
-                scores.add(Float.parseFloat(line));
+                this.scores.add(Float.parseFloat(line));
             }
 
-        } catch (IOException err) {
+        } catch (final IOException err) {
             JOptionPane.showMessageDialog(
                     null, "Error while reading high-scores: " + err.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -41,12 +42,12 @@ public class Scores {
     }
 
     private void save() {
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
-            for (int i = 0; i < Math.min(5, scores.size()); ++i) {
-                out.write(scores.get(i) + "\n");
+        try (final BufferedWriter out = new BufferedWriter(new FileWriter(this.file, StandardCharsets.UTF_8))) {
+            for (int i = 0; i < Math.min(5, this.scores.size()); ++i) {
+                out.write(this.scores.get(i) + "\n");
             }
 
-        } catch (IOException err) {
+        } catch (final IOException err) {
             JOptionPane.showMessageDialog(
                     null, "An error occurred while saving high-scores: " + err.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -54,12 +55,12 @@ public class Scores {
     }
 
     public void add(String score) {
-        scores.add(Float.parseFloat(score));
-        Collections.sort(scores);
+        this.scores.add(Float.parseFloat(score));
+        Collections.sort(this.scores);
         this.save();
     }
 
     public List<Float> getScores() {
-        return scores;
+        return this.scores;
     }
 }

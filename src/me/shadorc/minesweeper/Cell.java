@@ -81,7 +81,7 @@ public class Cell extends JButton implements ActionListener {
         };
 
         this.setForeground(color);
-        this.setText(Integer.toString(surroundingBombCount));
+        this.setText(Integer.toString(this.surroundingBombCount));
     }
 
     public void reset() {
@@ -131,7 +131,7 @@ public class Cell extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        Cell source = (Cell) event.getSource();
+        final Cell source = (Cell) event.getSource();
 
         // If bombs weren't placed yet, start the timer and place them
         if (!this.grid.areBombsSet()) {
@@ -169,7 +169,7 @@ public class Cell extends JButton implements ActionListener {
     }
 
     protected boolean isBomb() {
-        return isBomb;
+        return this.isBomb;
     }
 
     public void setState(State state) {
